@@ -15,12 +15,12 @@ def analyzeImage(img):
 
 # server main below
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as serversocket:
-    serversocket.bind(device['comp-node-1-lo'])
+    serversocket.bind(device['server'])
     serversocket.settimeout(3.0)
     serversocket.listen(0)  # max listen num: only listen one connection to avoid data seperation
 
     print('\033c')
-    printT(f"Listening to {device['comp-node-1-lo']}.")
+    printT(f"Listening to {device['server']}.")
     while True:
         try:
             try:
@@ -38,7 +38,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as serversocket:
             printT(f"Sending back result length: {len(plateResult)}")
             clientsocket.sendall(plateResult)
             clientsocket.close()
-            printT(f"Listening to {device['comp-node-1-lo']}.")
+            printT(f"Listening to {device['server']}.")
 
         except socket.timeout:
             printT("Error: Connection timeout.")
